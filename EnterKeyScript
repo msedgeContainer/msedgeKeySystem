@@ -1,85 +1,72 @@
-local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))()
-local Player = game.Players.LocalPlayer
-  local Window = OrionLib:MakeWindow({
-		Name = "[🎃HALLOWEEN🎃] msedge - Key System",
-		HidePremium = false,
-		SaveConfig = true,
-		ConfigFolder = "OrionTest",
-        IntroText = "[🎃HALLOWEEN🎃] msedge - Key System"       
-})
-function MakeScriptHub()
-         loadstring(game:HttpGet("https://raw.githubusercontent.com/coolperson-sudo/SlapBattles/refs/heads/main/msedgeHalloween"))()
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local WindowKey = OrionLib:MakeWindow({Name = "[🎃HALLOWEEN🎃] msedge - Key System", HidePremium = false, IntroEnabled = true, IntroText = "[🎃HALLOWEEN🎃] msedge - Key System", SaveConfig = true, ConfigFolder = "msedgeKeySystem"})
+
+--Values
+
+_G.Key = "msedgeContainer"
+_G.KeyInput = "string"
+
+--Functions
+
+function IncorrectKeyNotification()
+    OrionLib:MakeNotification({
+        Name = "Incorrect Key!",
+        Content = "You have entered a Incorrect Key!",
+        Image = "rbxassetid://4483345998",
+        Time = 5
+    })
 end
 
-OrionLib:MakeNotification({
-	Name = "Logged in!",
-	Content = "You need an key "..Player.Name..".",
-	Image = "rbxassetid://4483345998",
-	Time = 5
+function Clickboard()
+    OrionLib:MakeNotification({
+        Name = "Information",
+        Content = "Check your Clipboard!",
+        Image = "rbxassetid://4483345998",
+        Time = 8
+    })
+end
+
+
+
+function MakeScriptHub()
+    OrionLib:Destroy()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/coolperson-sudo/SlapBattles/refs/heads/main/msedgeHalloween"))()
+end
+
+--KeySystem 2/2
+
+local KeyTab = WindowKey:MakeTab({
+    Name = "Get Key",
+    Icon = "rbxassetid://6023426915",
+    PremiumOnly = false
 })
 
-getgenv().Key = "msedgeContainer"
-getgenv().KeyInput = "string"
-
-local Tab = Window:MakeTab({
-	Name = "Key",
-	Icon = "rbxassetid://4483345998",
-	PremiumOnly = false
-}) --Making A Tab
-
-Tab:AddTextbox({
-	Name = "Key",
-	Default = "Enter Key.",
-	TextDisappear = true,
-	Callback = function(Value)
-		getgenv().KeyInput = Value
-	end	  
-}
-
-Tab:AddButton({
-    Name = "Check Key",
+KeyTab:AddButton({
+    Name = "Get Key",
     Callback = function()
-        if getgenv().KeyInput == getgenv().Key then
-            OrionLib:MakeNotification({
-                Name = "Checking Key",
-                Content = "Checking Key..",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-            wait(2)
-            OrionLib:MakeNotification({
-                Name = "Correct Key!",
-                Content = "The key you entered is correct.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-            wait(1)
-            OrionLib:Destroy()
-            wait(.3)
-            MakeScriptHub()
-        else
-           OrionLib:MakeNotification({
-                Name = "Checking Key",
-                Content = "Checking key..",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-            wait(2)
-            OrionLib:MakeNotification({
-                Name = "Incorrect Key!",
-                Content = "The key you entered is incorrect.",
-                Image = "rbxassetid://4483345998",
-                Time = 5
-            })
-        end
+            setclipboard("https://linkvertise.com/1245606/msedge-key-system?o=sharing") -- Your Link To get Key
+            toclipboard("https://linkvertise.com/1245606/msedge-key-system?o=sharing") -- Your Link To get Key
+            Clickboard()
+            end
+})
+
+
+KeyTab:AddTextbox({
+    Name = "Enter Key",
+    Default = "",
+    TextDisappear = true,
+    Callback = function(Value)
+        _G.KeyInput = Value
     end
 })
 
-Tab:AddButton({
-	Name = "Copy Key",
-	Callback = function()
-      		setclipboard("https://pastebin.com/BbysXhPi")
-  	end    
-}) 
-    
-OrionLib:Init()
+KeyTab:AddButton({
+    Name = "Check Key",
+    Callback = function()
+              if _G.KeyInput == _G.Key then
+            MakeScriptHub()
+            else
+                IncorrectKeyNotification()
+            end
+      end
+})
