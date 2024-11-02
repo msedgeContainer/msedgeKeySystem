@@ -1,3 +1,8 @@
+-- i dont really care if this shows source code of the key system but its just for money, you can bypass it and i wont get mad
+
+
+
+
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 local WindowKey = OrionLib:MakeWindow({Name = "[🎃HALLOWEEN🎃] msedge - Key System", HidePremium = false, IntroEnabled = true, IntroText = "[🎃HALLOWEEN🎃] msedge - Key System", SaveConfig = true, ConfigFolder = "msedgeKeySystem"})
 
